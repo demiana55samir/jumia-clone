@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getFirestore, collection, getDocs } from 'firebase/firestore';
 import db from "../../firebase";
+import RecomHeader from './header';
 
 export default function Recommendedforu() {
   const [products, setProducts] = useState([]);
@@ -26,6 +27,7 @@ export default function Recommendedforu() {
 
   return (
     <div className="pt-5">
+      <RecomHeader title="Official Store" color="bg-lime-300" />
       <div className="carousel carousel-center w-full bg-white shadow-lg rounded-lg">
         {products.map((product) => (
           <div key={product.id} className="carousel-item flex flex-col w-[150px] md:w-[200px]">
