@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import RecomHeader from "../recommended/header";
 import { getFirestore, collection, getDocs } from "firebase/firestore";
 import db from "../../firebase";
-import Card from "react-bootstrap/Card";
 import Link from "next/link";
 
 export default function SliderMainPage() {
@@ -28,30 +27,28 @@ export default function SliderMainPage() {
     fetchProducts();
   }, []);
   return (
-    <div className="container mt-5">
+    <div className="container mt-5 items-center justify-center">
       <RecomHeader title="Recommended Products" color="bg-lime-300" />
-      <div className="container mt-3 flex flex-wrap justify-content-around">
-        {products.map((product) => (
-          <div key={product.id} className="mb-4">
-            <Card
-              style={{ width: "400px", height: "500px", alignItems: "center" }}
-            >
-              <Card.Img
-                variant="top"
-                src={product.imageURL}
-                style={{ width: "200px", height: "300px", objectFit: "cover" }}
-              />
-              <Card.Body>
-                <Card.Title>{product.name}</Card.Title>
-
-                <Link href={`/products/${product.id}`} className="btn btn-primary m-2">
-                  Details
-                </Link>
-              </Card.Body>
-            </Card>
-          </div>
-        ))}
+      <div className="container mt-3 flex flex-wrap justify-around m-3">
+  {products.map((product) => (
+    <div key={product.id} className="mb-4 mx-1 flex items-center justify-center">
+      <div className="bg-white p-6 shadow-md rounded-md"
+       style={{ width: "300px", height: "400px", alignItems: "center" }}>
+        <img
+          src={product.imageURL}
+          alt={product.name}
+          className="w-2/3 h-3/4 object-cover mx-auto mb-4"
+        />
+        <div className="text-center">
+        <h3 className="text-lg font-semibold mb-2 overflow-hidden line-clamp-1">{product.name}</h3>
+          <Link href={`/products/${product.id}`} className="btn btn-primary m-2">
+            Details
+          </Link>
+        </div>
       </div>
+    </div>
+  ))}
+</div>
     </div>
   );
 }
